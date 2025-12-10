@@ -6,23 +6,21 @@ export default function Hero() {
   const images = [
     "/banner_chave.png",
     "/banner_gibele.png",
-    "/banner_chave.png", // podes repetir ou trocar
+    "/banner_chave.png", 
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
-    }, 4000); // troca a cada 4s
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [images.length]);
 
   const handleRegister = () => {
-    window.open(
-      "https://www.elephantbet.co.ao/affiliates/?btag=2393072",
-      "_blank",
-      "noopener,noreferrer"
-    );
+    const affiliateUrl = "https://www.elephantbet.co.ao/pt/?action=register&btag=2393072";
+
+    window.open(affiliateUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -30,7 +28,6 @@ export default function Hero() {
       id="home"
       className="relative w-full h-[90vh] md:h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* CARROSSEL BACKGROUND */}
       <div className="absolute inset-0">
         {images.map((img, index) => (
           <img
@@ -45,10 +42,8 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* OVERLAY ESCURO PARA DAR LEITURA */}
       <div className="absolute inset-0 bg-black/50"></div>
 
-      {/* CONTEÚDO */}
       <div className="relative z-10 container mx-auto px-4 text-center text-white">
         <div className="mb-8 flex justify-center">
           <img
