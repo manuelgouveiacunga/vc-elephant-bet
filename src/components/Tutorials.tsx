@@ -1,29 +1,23 @@
-import { Video, ImageIcon, Wallet, TrendingUp } from 'lucide-react';
+import { Video, ImageIcon, Wallet, TrendingUp } from "lucide-react";
 
 const tutorials = [
   {
     icon: Video,
-    title: 'Como Criar Conta',
-    description: 'Vídeos passo a passo para criar a tua conta na Elephant Bet',
-    color: 'bg-blue-500',
+    title: "Como Criar Conta",
+    description: "Vídeos passo a passo para criar a tua conta na Elephant Bet",
+    color: "bg-blue-500",
   },
   {
-    icon: ImageIcon,
-    title: 'Guia em Imagens',
-    description: 'Tutorial visual com capturas de ecrã de cada passo',
-    color: 'bg-green-500',
+    icon: Video,
+    title: "Como Verificar Conta",
+    description: "Processo completo para verificar a tua conta",
+    color: "bg-orange-500",
   },
   {
     icon: Wallet,
-    title: 'Como Depositar',
-    description: 'Aprende a fazer depósitos de forma rápida e segura',
-    color: 'bg-purple-500',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Como Levantar',
-    description: 'Processo completo para levantar os teus ganhos',
-    color: 'bg-orange-500',
+    title: "Como Depositar",
+    description: "Aprende a fazer depósitos de forma rápida e segura",
+    color: "bg-purple-500",
   },
 ];
 
@@ -53,9 +47,7 @@ export default function Tutorials() {
                 <h3 className="text-xl font-bold text-[#24366E] mb-2">
                   {tutorial.title}
                 </h3>
-                <p className="text-gray-600">
-                  {tutorial.description}
-                </p>
+                <p className="text-gray-600">{tutorial.description}</p>
                 <button className="mt-4 text-[#F72585] font-semibold hover:underline">
                   Ver Tutorial →
                 </button>
