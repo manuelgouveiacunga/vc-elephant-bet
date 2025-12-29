@@ -1,12 +1,23 @@
 import { useState } from "react";
 import { Video, Wallet, X, ChevronLeft, ChevronRight } from "lucide-react";
 
+export enum TutorialType {
+  VIDEO = "video",
+  IMAGE = "image",
+}
+
+export enum TutorialColor {
+  BLUE = "bg-blue-500",
+  ORANGE = "bg-orange-500",
+  PURPLE = "bg-purple-500",
+}
+
 interface Tutorial {
   icon: any;
   title: string;
   description: string;
-  color: string;
-  type: "video" | "image";
+  color: TutorialColor;
+  type: TutorialType;
   content: string | string[];
 }
 
@@ -15,27 +26,32 @@ const tutorials: Tutorial[] = [
     icon: Video,
     title: "Como Criar Conta",
     description: "Vídeos passo a passo para criar a tua conta na Elephant Bet",
-    color: "bg-blue-500",
-    type: "video",
+    color: TutorialColor.BLUE,
+    type: TutorialType.VIDEO,
     content: "/como_abrir_conta.mp4",
   },
   {
     icon: Video,
     title: "Como Verificar Conta",
     description: "Processo completo para verificar a tua conta",
-    color: "bg-orange-500",
-    type: "video",
+    color: TutorialColor.ORANGE,
+    type: TutorialType.VIDEO,
     content: "/como_verificar_conta.mp4",
   },
   {
     icon: Wallet,
     title: "Como Depositar",
     description: "Aprende a fazer depósitos de forma rápida e segura",
-    color: "bg-purple-500",
-    type: "image",
+    color: TutorialColor.PURPLE,
+    type: TutorialType.IMAGE,
     content: ["/deposito_por_voucher.jpeg", "/deposito_pelo_express.jpeg"],
   },
 ];
+
+const TutorialTypeLabel: Record<TutorialType, string> = {
+  [TutorialType.VIDEO]: "Vídeo",
+  [TutorialType.IMAGE]: "Imagens",
+};
 
 export default function Tutorials() {
   const [selectedTutorial, setSelectedTutorial] = useState<Tutorial | null>(
@@ -96,22 +112,24 @@ export default function Tutorials() {
               >
                 <tutorial.icon className="w-20 h-20 text-white" />
               </div>
+
               <div className="p-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <span
-                    className={`text-xs font-bold px-2 py-1 rounded uppercase tracking-wider ${
-                      tutorial.type === "video"
-                        ? "bg-blue-100 text-blue-600"
-                        : "bg-purple-100 text-purple-600"
-                    }`}
-                  >
-                    {tutorial.type === "video" ? "Vídeo" : "Imagens"}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-[#24366E] mb-2">
+                <span
+                  className={`text-xs font-bold px-2 py-1 rounded uppercase tracking-wider ${
+                    tutorial.type === TutorialType.VIDEO
+                      ? "bg-blue-100 text-blue-600"
+                      : "bg-purple-100 text-purple-600"
+                  }`}
+                >
+                  {TutorialTypeLabel[tutorial.type]}
+                </span>
+
+                <h3 className="text-xl font-bold text-[#24366E] mt-3 mb-2">
                   {tutorial.title}
                 </h3>
+
                 <p className="text-gray-600">{tutorial.description}</p>
+
                 <button className="mt-4 text-[#F72585] font-semibold flex items-center gap-2 group-hover:translate-x-2 transition-transform">
                   Ver Tutorial <ChevronRight className="w-4 h-4" />
                 </button>
@@ -119,49 +137,8 @@ export default function Tutorials() {
             </div>
           ))}
         </div>
-
-        {/* Testimonial Videos Section */}
-        <div className="mt-20">
-          <div className="text-center mb-10">
-            <h3 className="text-2xl md:text-3xl font-bold text-[#24366E] mb-2">
-              Resultados de Quem Já Ganhou
-            </h3>
-            <p className="text-gray-600">
-              Inspira-te com o sucesso dos nossos jogadores
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[9/16] md:aspect-video bg-black group">
-              <video
-                src="/testemunha_ganhos.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <p className="text-white font-bold">Vitória Surpresa</p>
-              </div>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-[9/16] md:aspect-video bg-black group">
-              <video
-                src="/testemunha_ganho_aviator.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <p className="text-white font-bold">Ganhos no Aviator</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
-      {/* Modal */}
       {selectedTutorial && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
@@ -173,7 +150,7 @@ export default function Tutorials() {
           >
             <button
               onClick={closeTutorial}
-              className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/80 text-white rounded-full transition-colors"
+              className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/80 text-white rounded-full"
             >
               <X className="w-6 h-6" />
             </button>
@@ -183,8 +160,8 @@ export default function Tutorials() {
                 {selectedTutorial.title}
               </h3>
 
-              <div className="relative aspect-video flex items-center justify-center bg-black rounded-lg overflow-hidden">
-                {selectedTutorial.type === "video" ? (
+              <div className="relative aspect-video bg-black rounded-lg overflow-hidden flex items-center justify-center">
+                {selectedTutorial.type === TutorialType.VIDEO ? (
                   <video
                     src={selectedTutorial.content as string}
                     controls
@@ -195,9 +172,9 @@ export default function Tutorials() {
                   <div className="relative w-full h-full flex items-center justify-center">
                     <img
                       src={
-                        Array.isArray(selectedTutorial.content)
-                          ? selectedTutorial.content[currentImageIndex]
-                          : selectedTutorial.content
+                        (selectedTutorial.content as string[])[
+                          currentImageIndex
+                        ]
                       }
                       alt={selectedTutorial.title}
                       className="max-w-full max-h-full object-contain"
@@ -208,21 +185,22 @@ export default function Tutorials() {
                         <>
                           <button
                             onClick={prevImage}
-                            className="absolute left-4 p-2 bg-white/20 hover:bg-white/40 text-white rounded-full transition-all"
+                            className="absolute left-4 p-2 bg-white/20 hover:bg-white/40 text-white rounded-full"
                           >
                             <ChevronLeft className="w-8 h-8" />
                           </button>
                           <button
                             onClick={nextImage}
-                            className="absolute right-4 p-2 bg-white/20 hover:bg-white/40 text-white rounded-full transition-all"
+                            className="absolute right-4 p-2 bg-white/20 hover:bg-white/40 text-white rounded-full"
                           >
                             <ChevronRight className="w-8 h-8" />
                           </button>
+
                           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                             {selectedTutorial.content.map((_, i) => (
                               <div
                                 key={i}
-                                className={`w-3 h-3 rounded-full transition-all ${
+                                className={`w-3 h-3 rounded-full ${
                                   i === currentImageIndex
                                     ? "bg-white scale-110"
                                     : "bg-white/30"
