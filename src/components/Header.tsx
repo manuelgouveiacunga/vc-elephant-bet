@@ -24,15 +24,6 @@ export default function Header() {
           <a href="#home" className="hover:text-[#F72585] transition-colors">
             Início
           </a>
-          <a
-            href="#tutoriais"
-            className="hover:text-[#F72585] transition-colors"
-          >
-            Tutoriais
-          </a>
-          <a href="#guias" className="hover:text-[#F72585] transition-colors">
-            Guias
-          </a>
         </nav>
 
         <button
@@ -70,20 +61,6 @@ export default function Header() {
             onClick={closeMenu}
           >
             Início
-          </a>
-          <a
-            href="#tutoriais"
-            className="hover:text-[#F72585] transition-colors py-2 border-b border-white/20"
-            onClick={closeMenu}
-          >
-            Tutoriais
-          </a>
-          <a
-            href="#guias"
-            className="hover:text-[#F72585] transition-colors py-2"
-            onClick={closeMenu}
-          >
-            Guias
           </a>
         </nav>
       </div>

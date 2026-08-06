@@ -64,7 +64,7 @@ export default function Hero() {
 
         <button
           onClick={handleRegister}
-          className="bg-[#F72585] text-white font-bold text-lg px-8 py-4 rounded-full hover:bg-[#d41d6f] transform hover:scale-105 transition-all shadow-xl hover:shadow-2xl"
+          className="bg-[#F72585] text-white font-bold text-xl px-10 py-5 rounded-full hover:bg-[#d41d6f] transform hover:scale-110 transition-all shadow-2xl hover:shadow-pink-500/50 animate-pulse mt-4"
         >
           Registrar Agora
         </button>
